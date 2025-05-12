@@ -1,1 +1,37 @@
 include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    #패키지 import 명시적 사용 :  상대 경로(../) 대신 항상 package: import를 사용하도록 권장. 코드 위치가 바뀌어도 안전하게 유지됨.
+    always_use_package_imports: true
+    
+    #const 사용 권장
+    prefer_const_constructors: true  # 변경되지 않는 객체는 const로 선언하여 성능 향상 및 불변성 유지.
+    prefer_const_literals_to_create_immutables: true #List, Map, Set 등도 const로 선언 가능하면 하도록 권장.
+    prefer_const_declarations: true #값이 절대 바뀌지 않는 변수는 final보다 const를 사용.
+
+    #생성자 정렬
+    sort_constructors_first: true # 클래스 내에서 생성자는 항상 맨 위에 위치하도록 정렬. 가독성과 유지보수 향상.
+
+    #디버깅용 print 방지
+    avoid_print: true # print() 대신 logger나 debugPrint 등을 사용하도록 유도. 실제 앱 배포 시 콘솔 출력 제거 필요.
+
+    #불필요한 this 제거
+    unnecessary_this: true #this.를 생략해도 되는 경우에는 생략하도록 권장. 코드가 더 깔끔해짐.
+
+    #private 필드에 underscore 사용
+    library_private_types_in_public_api: true #_PrivateClass와 같은 private 타입을 외부에 노출하지 않도록 함. (API의 안정성과 명확성 확보)
+
+    #getter에서 return 문만 있을때 => 사용
+    prefer_expression_function_bodies: true #간단한 return 함수는 중괄호 {} 대신 =>를 사용하여 간결하게 표현.
+
+    #final 사용 권장
+    prefer_final_locals: true #함수 내 지역 변수는 변경되지 않으면 final로 선언. 불변성을 강조하여 버그 예방
+    prefer_final_parameters: true #	매개변수도 내부에서 변경하지 않으면 final로 선언. 코드의 안정성과 명확성 향상.
+
+    #명시적 타입을 권장
+    always_specify_types: false #변수나 함수의 타입을 항상 명시하도록 강제. 팀에 따라 가독성 ↑ 또는 과하게 장황하다고 볼 수 있음.
+
+    # 파일 끝에 줄바꿈 추가
+    always_put_control_body_on_new_line: true #if, for 등의 제어문 블록은 반드시 줄 바꿈하여 시작하도록 유도. 가독성 향상.
+    always_put_required_named_parameters_first: true #필수 named parameter를 항상 optional parameter보다 먼저 쓰도록 강제. IDE 자동완성도 좋아짐.

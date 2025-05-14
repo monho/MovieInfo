@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
       body: Center(
         child: Column(children: [
           Text(
-            '가장 인기있SSF는MM', 
+            '가장 인s기있SSF는MM', 
             style: TextStyle(
               fontSize: 16,
             )

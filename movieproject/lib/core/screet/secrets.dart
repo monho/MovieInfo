@@ -1,0 +1,2 @@
+const String kTMDBBaseUrl = 'https://api.themoviedb.org/3';
+const String kTMDBApiKey = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMjZhYjRhNzg3YjcyNTdiYzJlNGY3YTY2MTY3M2U0YyIsIm5iZiI6MTc0NzAxMjY3Ni4xNDEsInN1YiI6IjY4MjE0YzQ0NThkZTI2NzUwNDdlN2IyYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.z2LrbERJH6UfmgBpRi2crPBripFSRQ94ehxqNmYm8SQ';

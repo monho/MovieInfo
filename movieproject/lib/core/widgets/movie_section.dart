@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:movieproject/domain/entity/movie.dart';
 
 class MovieSection extends StatelessWidget {
+
+  const MovieSection({
+    required this.title, required this.movies, super.key,
+    this.showRanking = false,
+  });
   final String title;
+  final List<Movie> movies;
   final bool showRanking;
 
-  const MovieSection({super.key, required this.title, this.showRanking = false});
-
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(final BuildContext context) => Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -19,16 +23,17 @@ class MovieSection extends StatelessWidget {
           height: 180,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 20,
-            itemBuilder: (context, index) {
+            itemCount: movies.length,
+            itemBuilder: (final context, final index) {
+              final movie = movies[index];
               return Padding(
                 padding: const EdgeInsets.only(left: 20),
                 child: Stack(
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        'assets/movie_${(index % 5) + 1}.jpg',
+                      child: Image.network(
+                        movie.fullPosterUrl,
                         height: 180,
                         width: 120,
                         fit: BoxFit.cover,
@@ -40,6 +45,7 @@ class MovieSection extends StatelessWidget {
                         bottom: 8,
                         child: CircleAvatar(
                           radius: 12,
+                          // ignore: deprecated_member_use
                           backgroundColor: Colors.black.withOpacity(0.7),
                           child: Text('${index + 1}', style: const TextStyle(fontSize: 12)),
                         ),
@@ -52,5 +58,4 @@ class MovieSection extends StatelessWidget {
         )
       ],
     );
-  }
 }

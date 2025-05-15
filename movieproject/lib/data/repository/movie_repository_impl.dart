@@ -26,4 +26,5 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<Movie> getMovieDetail(final int id) =>
       apiService.fetchMovieDetail(id);
+      
 }

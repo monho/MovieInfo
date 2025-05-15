@@ -4,26 +4,58 @@ import 'package:movieproject/data/datasource/tmdb_api_service.dart';
 import 'package:movieproject/data/repository/movie_repository_impl.dart';
 import 'package:movieproject/core/screet/secrets.dart' as key;
 
-
 const _apiKey = key.kTMDBApiKey;
+
 final movieRepositoryProvider = Provider<MovieRepositoryImpl>((final ref) => MovieRepositoryImpl(TMDBApiService(_apiKey)));
 
-final nowPlayingProvider = FutureProvider<List<Movie>>((final ref) async {
-  final repo = ref.watch(movieRepositoryProvider);
-  return repo.getNowPlaying();
-});
+/// 현재 상영중
+final nowPlayingProvider = AsyncNotifierProvider<NowPlayingNotifier, List<Movie>>(
+  NowPlayingNotifier.new,
+);
 
-final popularProvider = FutureProvider<List<Movie>>((final ref) async {
-  final repo = ref.watch(movieRepositoryProvider);
-  return repo.getPopular();
-});
+class NowPlayingNotifier extends AsyncNotifier<List<Movie>> {
+  @override
+  Future<List<Movie>> build() async {
+    final repo = ref.watch(movieRepositoryProvider);
+    return await repo.getNowPlaying();
+  }
+}
 
-final topRatedProvider = FutureProvider<List<Movie>>((final ref) async {
-  final repo = ref.watch(movieRepositoryProvider);
-  return repo.getTopRated();
-});
+///  인기순
+final popularProvider = AsyncNotifierProvider<PopularNotifier, List<Movie>>(
+  PopularNotifier.new,
+);
 
-final upcomingProvider = FutureProvider<List<Movie>>((final ref) async {
-  final repo = ref.watch(movieRepositoryProvider);
-  return repo.getUpcoming();
-});
+class PopularNotifier extends AsyncNotifier<List<Movie>> {
+  @override
+  Future<List<Movie>> build() async {
+    final repo = ref.watch(movieRepositoryProvider);
+    return await repo.getPopular();
+  }
+}
+
+///  평점 높은순
+final topRatedProvider = AsyncNotifierProvider<TopRatedNotifier, List<Movie>>(
+  TopRatedNotifier.new,
+);
+
+class TopRatedNotifier extends AsyncNotifier<List<Movie>> {
+  @override
+  Future<List<Movie>> build() async {
+    final repo = ref.watch(movieRepositoryProvider);
+    return await repo.getTopRated();
+  }
+}
+
+///  개봉 예정
+final upcomingProvider = AsyncNotifierProvider<UpcomingNotifier, List<Movie>>(
+  UpcomingNotifier.new,
+);
+
+class UpcomingNotifier extends AsyncNotifier<List<Movie>> {
+  @override
+  Future<List<Movie>> build() async {
+    final repo = ref.watch(movieRepositoryProvider);
+    return await repo.getUpcoming();
+  }
+}
